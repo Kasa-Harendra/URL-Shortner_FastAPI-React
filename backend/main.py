@@ -1,14 +1,13 @@
 from fastapi import FastAPI
 from router import router
 from fastapi.middleware.cors import CORSMiddleware
-from dotenv import load_dotenv
-
-load_dotenv()
+from fastapi.responses import HTMLResponse
 
 app = FastAPI()
 
 origins = [
-    "https://url-shortner-fast-api-react.vercel.app/",
+    "http://localhost:5173",
+    "https://url-shortner-fast-api-react.vercel.app"
 ]
 
 app.add_middleware(
@@ -23,4 +22,10 @@ app.include_router(router=router)
 
 @app.get('/')
 def root():
-    return " Welcome to URL-Shortner. The live app is available at https://url-shortner-fast-api-react.vercel.app/"
+    return HTMLResponse(
+        content="""
+        <h1>Welcome to FastAPI application</h1>
+        Live app is available at : <a href="https://url-shortner-fast-api-react.vercel.app/">https://url-shortner-fast-api-react.vercel.app/</a>
+        """,
+        status_code=200
+    )
