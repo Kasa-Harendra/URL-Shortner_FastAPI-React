@@ -20,7 +20,7 @@ const HomePage = () => {
             });
 
             if (response.status === 201) {
-                const newUrl = `https://localhost:5173/${response.data.short_code}`;
+                const newUrl = `https://url-shortner-fast-api-react.vercel.app/${response.data.short_code}`;
                 setShortenedUrl(newUrl);
             }
         } catch (err) {

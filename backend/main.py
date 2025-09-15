@@ -1,11 +1,14 @@
 from fastapi import FastAPI
 from router import router
 from fastapi.middleware.cors import CORSMiddleware
+from dotenv import load_dotenv
+
+load_dotenv()
 
 app = FastAPI()
 
 origins = [
-    "http://localhost:5173",
+    REACT_ORIGIN,
 ]
 
 app.add_middleware(
