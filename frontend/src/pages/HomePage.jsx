@@ -14,13 +14,13 @@ const HomePage = () => {
         setShortenedUrl('');
 
         try {
-            const response = await axios.post('http://127.0.0.1:8000/shorten', {
+            const response = await axios.post('https://url-shortner-fastapi-react.onrender.com/shorten', {
                 original_link: originalLink,
                 choice_code: choiceCode || null,
             });
 
             if (response.status === 201) {
-                const newUrl = `http://localhost:5173/${response.data.short_code}`;
+                const newUrl = `https://localhost:5173/${response.data.short_code}`;
                 setShortenedUrl(newUrl);
             }
         } catch (err) {
