@@ -3,6 +3,5 @@ typing
 pymongo
 datetime
 uuid
-bson
 pydantic
 uvicorn
