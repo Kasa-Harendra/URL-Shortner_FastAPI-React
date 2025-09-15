@@ -23,4 +23,4 @@ app.include_router(router=router)
 
 @app.get('/')
 def root():
-    return " This is the ROOT path "
+    return " Welcome to URL-Shortner. The live app is available at https://url-shortner-fast-api-react.vercel.app/"
