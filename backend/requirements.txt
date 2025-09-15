@@ -5,3 +5,4 @@ datetime
 uuid
 bson
 pydantic
+uvicorn
