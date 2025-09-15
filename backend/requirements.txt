@@ -6,3 +6,4 @@ uuid
 pydantic
 uvicorn
 certifi
+dotenv
