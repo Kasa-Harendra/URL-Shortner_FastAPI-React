@@ -7,11 +7,13 @@ const HomePage = () => {
     const [choiceCode, setChoiceCode] = useState('');
     const [shortenedUrl, setShortenedUrl] = useState('');
     const [error, setError] = useState('');
+    const [warning, setWarning] = useState('');
 
     const handleSubmit = async (e) => {
         e.preventDefault();
         setError('');
         setShortenedUrl('');
+        setWarning('');
 
         try {
             const response = await axios.post('https://url-shortner-fastapi-react.onrender.com/shorten', {
@@ -22,6 +24,9 @@ const HomePage = () => {
             if (response.status === 201) {
                 const newUrl = `https://url-shortner-fast-api-react.vercel.app/${response.data.short_code}`;
                 setShortenedUrl(newUrl);
+            } else {
+                const warning_message = response.data.message;
+                setWarning(warning_message);
             }
         } catch (err) {
             if (err.response && err.response.data && err.response.data.message) {
@@ -29,6 +34,15 @@ const HomePage = () => {
             } else {
                 setError('An unexpected error occurred.');
             }
+        }
+    };
+
+    const handleCopy = async () => {
+        try {
+            await navigator.clipboard.writeText(shortenedUrl);
+            alert('URL copied to clipboard!');
+        } catch (err) {
+            setError('Failed to copy URL.');
         }
     };
 
@@ -65,7 +79,14 @@ const HomePage = () => {
                     </Form>
 
                     {shortenedUrl && <Alert variant="success" className="mt-3">
-                        Shortened URL: <a href={shortenedUrl} target="_blank" rel="noopener noreferrer">{shortenedUrl}</a>
+                        Shortened URL: <code><a href={shortenedUrl} target="_blank" rel="noopener noreferrer">{shortenedUrl}</a></code>
+                        <Button variant="secondary" size="sm" className="ms-2" onClick={handleCopy}>
+                            Copy
+                        </Button>
+                    </Alert>}
+
+                    {warning && <Alert variant="warning" className="mt-3">
+                        Warning: <p>{warning}</p>
                     </Alert>}
 
                     {error && <Alert variant="danger" className="mt-3">{error}</Alert>}
