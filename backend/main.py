@@ -8,7 +8,7 @@ load_dotenv()
 app = FastAPI()
 
 origins = [
-    REACT_ORIGIN,
+    "https://url-shortner-fast-api-react.vercel.app/",
 ]
 
 app.add_middleware(
