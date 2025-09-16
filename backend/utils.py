@@ -1,5 +1,5 @@
 import pymongo
-from schemas import URLStoreSchema
+from .schemas import URLStoreSchema
 from datetime import datetime
 
 def generate_short_code(length=6) -> str:

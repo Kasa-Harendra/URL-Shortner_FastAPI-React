@@ -1,5 +1,5 @@
 from fastapi import FastAPI
-from router import router
+from .router import router
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.responses import HTMLResponse, FileResponse
 from fastapi.staticfiles import StaticFiles
