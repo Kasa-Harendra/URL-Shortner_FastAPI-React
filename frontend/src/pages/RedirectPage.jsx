@@ -9,7 +9,7 @@ const RedirectPage = () => {
 
     useEffect(() => {
         if (shortCode) {
-            window.location.href = `https://url-shortner-fastapi-react.onrender.com/${shortCode}`;
+            window.location.href = `${window.location.origin}/api/${shortCode}`;
         } else {
             navigate('/');
         }

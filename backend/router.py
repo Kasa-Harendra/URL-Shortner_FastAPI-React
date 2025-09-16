@@ -5,7 +5,7 @@ from models import Shorten
 from db import collection
 from utils import generate_short_code, insert_data_into_collection
 
-router = APIRouter(prefix='')
+router = APIRouter(prefix='/api')
 
 @router.post('/shorten')
 def shorten(request: Shorten):

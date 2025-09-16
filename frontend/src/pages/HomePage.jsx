@@ -16,14 +16,13 @@ const HomePage = () => {
         setWarning('');
 
         try {
-            const response = await axios.post('https://url-shortner-fastapi-react.onrender.com/shorten', {
+            const response = await axios.post(`${window.location.origin}/api/shorten`, {
                 original_link: originalLink,
                 choice_code: choiceCode || null,
             });
 
             if (response.status === 201) {
-                // const newUrl = `http://localhost:5173/${response.data.short_code}`;
-                const newUrl = `https://url-shortner-fast-api-react.vercel.app/${response.data.short_code}`;
+                const newUrl = `${window.location.origin}/${response.data.short_code}`;
                 setShortenedUrl(newUrl);
             } else {
                 const warning_message = response.data.message;

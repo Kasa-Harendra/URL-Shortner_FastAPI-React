@@ -1,7 +1,9 @@
 from fastapi import FastAPI
 from router import router
 from fastapi.middleware.cors import CORSMiddleware
-from fastapi.responses import HTMLResponse
+from fastapi.responses import HTMLResponse, FileResponse
+from fastapi.staticfiles import StaticFiles
+import os
 
 app = FastAPI()
 
@@ -9,6 +11,8 @@ origins = [
     "http://localhost:5173",
     "https://url-shortner-fast-api-react.vercel.app"
 ]
+
+app.mount("/assets", StaticFiles(directory="frontend/dist/assets"), name="assets")
 
 app.add_middleware(
     CORSMiddleware,
@@ -29,3 +33,8 @@ def root():
         """,
         status_code=200
     )
+
+@app.get("/{full_path:path}")
+async def serve_react_app(full_path: str):
+    index_path = os.path.join("frontend", "dist", "index.html")
+    return FileResponse(index_path)
