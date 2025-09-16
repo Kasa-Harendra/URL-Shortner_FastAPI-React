@@ -24,15 +24,15 @@ app.add_middleware(
 
 app.include_router(router=router)
 
-@app.get('/')
-def root():
-    return HTMLResponse(
-        content="""
-        <h1>Welcome to FastAPI application</h1>
-        Live app is available at : <a href="https://url-shortner-fast-api-react.vercel.app/">https://url-shortner-fast-api-react.vercel.app/</a>
-        """,
-        status_code=200
-    )
+# @app.get('/')
+# def root():
+#     return HTMLResponse(
+#         content="""
+#         <h1>Welcome to FastAPI application</h1>
+#         Live app is available at : <a href="https://url-shortner-fast-api-react.vercel.app/">https://url-shortner-fast-api-react.vercel.app/</a>
+#         """,
+#         status_code=200
+#     )
 
 @app.get("/{full_path:path}")
 async def serve_react_app(full_path: str):
